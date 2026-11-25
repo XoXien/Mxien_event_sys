@@ -1,0 +1,60 @@
+{# Layout shared by the dashboards. Each role supplies its own navigation and page content. #}
+{% load static static_assets %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{% block title %}Dashboard{% endblock %} · BSIT Events</title>
+  <link rel="stylesheet" href="{% asset 'css/hero-base.css' %}">
+  <link rel="stylesheet" href="{% asset 'css/administration.css' %}">
+  {% block extra_head %}{% endblock %}
+  <script src="{% asset 'interface.js' %}" defer></script>
+  <script src="{% asset 'sidebar.js' %}" defer></script>
+  <link rel="stylesheet" href="{% asset 'css/feedback.css' %}">
+  <link rel="stylesheet" href="{% asset 'css/buttons.css' %}">
+  <link rel="stylesheet" href="{% asset 'css/theme.css' %}">
+  <link rel="stylesheet" href="{% asset 'css/dashboard-navigation.css' %}">
+  <link rel="stylesheet" href="{% asset 'css/sidebar.css' %}">
+  <link rel="stylesheet" href="{% asset 'css/dashboard-theme.css' %}">
+  {% include 'partials/favicon.html' %}
+  {% include 'partials/password_assets.html' %}
+</head>
+<body class="management dashboard-shell{% block body_class %}{% endblock %}" data-sidebar-storage-key="bsit.sidebar.{{ portal_role|lower }}.{{ request.user.pk }}"{% if request.user.is_authenticated %} data-authenticated{% endif %}>
+  <a class="skip-link" href="#management-content">Skip to content</a>
+  <div class="management-layout{% block layout_class %}{% endblock %}" data-dashboard-layout>
+    <header class="dashboard-header">
+      <button type="button" class="action-button action-button--icon sidebar-mobile-toggle" data-sidebar-open aria-controls="dashboard-sidebar" aria-expanded="false" aria-label="Open navigation" title="Open navigation" hidden>
+        {% include 'partials/icon.html' with name='menu' only %}
+      </button>
+      <span class="dashboard-workspace-label">{% if portal_role == 'ADMIN' %}Administrator{% else %}{{ portal_role|title }}{% endif %} workspace</span>
+      {% block dashboard_profile %}{% endblock %}
+    </header>
+    <button type="button" class="sidebar-backdrop" data-sidebar-close aria-label="Close navigation" tabindex="-1" hidden></button>
+    <aside id="dashboard-sidebar" class="management-sidebar" aria-label="Dashboard navigation">
+      <div class="sidebar-brandbar">
+        <div class="sidebar-brand">{% include 'partials/brand.html' %}</div>
+        <button type="button" class="action-button action-button--icon sidebar-toggle" data-sidebar-toggle aria-controls="dashboard-sidebar" aria-expanded="true" aria-label="Collapse sidebar" title="Collapse sidebar" hidden>
+          {% include 'partials/icon.html' with name='menu' only %}
+        </button>
+      </div>
+      <div class="management-navigation">
+        <nav class="dashboard-tabs {% block dashboard_navigation_class %}{% endblock %}" aria-label="{% block dashboard_navigation_label %}Dashboard{% endblock %}">
+          {% block dashboard_navigation %}{% include 'portal/partials/navigation_links.html' %}{% endblock %}
+        </nav>
+        {% block dashboard_sidebar_footer %}{% endblock %}
+      </div>
+    </aside>
+    <nav id="dashboard-bottom-navigation" class="dashboard-tabs dashboard-bottom-nav" aria-label="{{ portal_role|title }} quick navigation">
+      {% include 'portal/partials/navigation_links.html' %}
+    </nav>
+    {# The skip link points here so keyboard users can reach the page content. #}
+    <main id="management-content" class="management-content" tabindex="-1">
+      {% include 'partials/feedback.html' %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+  {# Pages can load extra JavaScript after the dashboard markup. #}
+  {% block scripts %}{% endblock %}
+</body>
+</html>

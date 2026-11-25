@@ -1,0 +1,44 @@
+/* Keep identity review usable on a phone without covering or changing the QR itself. */
+.scan-identity-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 1800;
+  width: min(560px, calc(100% - 1.5rem));
+  max-height: calc(100vh - 1.5rem);
+  max-height: calc(100dvh - 1.5rem);
+  margin: auto;
+  padding: clamp(1rem, 3vw, 1.7rem);
+  border: 1px solid #57748e;
+  border-radius: 16px;
+  overflow-y: auto;
+  background: #152e44;
+  color: #f4f8fd;
+  box-shadow: 0 20px 75px #04111c99;
+}
+.scan-identity-dialog::backdrop { background: #04111ccc; }
+.scan-review-heading { display: flex; align-items: start; justify-content: space-between; gap: 1rem; }
+.scan-review-heading h2 { margin: .25rem 0 0; font-size: 1.35rem; }
+.scan-review-eyebrow { color: #a9d9ff; font-size: .8rem; font-weight: 750; }
+.scan-identity-dialog > p { margin: .8rem 0; line-height: 1.5; }
+.scan-review-student { display: flex; align-items: center; gap: 1rem; margin: 1.1rem 0; }
+.scan-review-photo { display: grid; flex: none; place-items: center; width: clamp(82px, 23vw, 120px); height: clamp(82px, 23vw, 120px); border: 1px solid #57748e; border-radius: 14px; overflow: hidden; background: #244761; color: #b8e5ff; font-size: 2rem; font-weight: 750; }
+.scan-review-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.scan-review-photo img[hidden], .scan-review-photo-note[hidden], .scan-review-error[hidden] { display: none; }
+.scan-review-identity { min-width: 0; overflow-wrap: anywhere; }
+.scan-review-identity h3 { margin: 0 0 .4rem; font-size: clamp(1.1rem, 4vw, 1.35rem); }
+.scan-review-identity > strong { color: #b8e5ff; font-size: 1rem; }
+.scan-review-identity p { margin: .45rem 0 0; color: #b9ccdc; }
+.scan-review-photo-note, .scan-review-error { padding: .65rem .8rem; border: 1px solid #80694a; border-radius: 8px; background: #43372b; color: #ffe0aa; }
+.scan-review-error { border-color: #986a77; background: #49323c; color: #ffd0db; }
+.scan-review-details { display: grid; gap: .5rem; margin: 1rem 0; padding-block: .9rem; border-block: 1px solid #35536c; }
+.scan-review-details > div { display: grid; grid-template-columns: minmax(6rem, .4fr) minmax(0, 1fr); gap: .6rem; }
+.scan-review-details dt { color: #b9ccdc; font-size: .85rem; }
+.scan-review-details dd { margin: 0; overflow-wrap: anywhere; font-size: .9rem; }
+.scan-review-expiry { color: #b9ccdc; font-size: .82rem; }
+.scan-review-actions { display: flex; justify-content: flex-end; gap: .65rem; flex-wrap: wrap; margin-top: 1rem; }
+.scan-review-actions > button { flex: 1 1 12rem; white-space: normal; text-align: center; }
+.scan-review-actions > button:disabled { opacity: .6; }
+@media (max-width: 380px) {
+  .scan-review-student { align-items: start; gap: .75rem; }
+  .scan-review-details > div { grid-template-columns: minmax(0, 1fr); gap: .15rem; }
+}

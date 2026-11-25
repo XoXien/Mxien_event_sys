@@ -1,0 +1,24 @@
+{# Nothing is saved until the assigned organizer confirms this student's identity. #}
+<dialog class="scan-identity-dialog" id="scan-identity-review" aria-labelledby="identity-review-title" aria-describedby="identity-review-help">
+  <div class="scan-review-heading">
+    <div><span class="scan-review-eyebrow" data-review-mode>Time In</span><h2 id="identity-review-title">Confirm student identity</h2></div>
+    <button type="button" class="action-button action-button--icon" data-review-cancel aria-label="Cancel scan">{% include 'partials/icon.html' with name='close' only %}</button>
+  </div>
+  <p id="identity-review-help">Compare the person in front of you with these student details before recording attendance.</p>
+  <div class="scan-review-student">
+    <div class="scan-review-photo"><img data-review-photo alt="Student profile photo" hidden><span data-review-initials aria-hidden="true"></span></div>
+    <div class="scan-review-identity"><h3 data-review-name></h3><strong data-review-school-id></strong><p data-review-course></p></div>
+  </div>
+  <p class="scan-review-photo-note" data-review-photo-note hidden>No profile photo is available. Compare the student's school ID before confirming.</p>
+  <dl class="scan-review-details">
+    <div><dt>Event</dt><dd data-review-event></dd></div>
+    <div><dt>Attendance day</dt><dd data-review-day></dd></div>
+    <div><dt>Scanned</dt><dd data-review-scanned></dd></div>
+  </dl>
+  <p class="scan-review-expiry" data-review-expiry aria-live="off"></p>
+  <p class="scan-review-error" data-review-error role="alert" hidden></p>
+  <div class="scan-review-actions">
+    <button type="button" class="action-button" data-review-reject>Not the same person</button>
+    <button type="button" class="action-button action-button--primary" data-review-confirm>Confirm and record</button>
+  </div>
+</dialog>

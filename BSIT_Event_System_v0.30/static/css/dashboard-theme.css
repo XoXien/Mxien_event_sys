@@ -1,0 +1,264 @@
+/* Reserve navigation rows and scroll the content pane so it cannot cover the bars. */
+body.dashboard-shell {
+  --tech-panel-shadow: inset 0 1px 0 #b6cdf409, 0 10px 30px #01040b26;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.dashboard-shell > .management-layout {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: var(--palette-background);
+  box-shadow: none;
+  color: var(--palette-text);
+}
+.dashboard-shell > .management-layout.workspace-portal {
+  background-color: var(--workspace-canvas);
+  background-image:
+    radial-gradient(ellipse 52rem 31rem at 92% -7%, #36528f38, transparent 74%),
+    radial-gradient(ellipse 43rem 29rem at 35% 1%, #1c647d29, transparent 72%);
+}
+
+.dashboard-shell .management-layout > .management-content {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  padding-bottom: 2rem;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scroll-padding-block: 1rem;
+}
+.dashboard-bottom-nav { display: none; }
+.dashboard-shell .workspace-portal {
+  --workspace-divider: var(--palette-line);
+  --workspace-dim: #b9cddd;
+  --workspace-blue-bg: #244b71;
+  --workspace-violet-bg: #29223f;
+  --workspace-mint-bg: #123329;
+  --workspace-amber-bg: #382d1b;
+  --workspace-rose-bg: #382232;
+}
+.dashboard-shell .management-layout > .management-sidebar {
+  border-color: var(--palette-line);
+  background: var(--palette-rail);
+}
+.dashboard-shell .management-layout > .dashboard-header {
+  position: relative;
+  top: auto;
+  margin: 0;
+  border-color: var(--palette-line);
+  background: var(--palette-rail);
+}
+.dashboard-shell .sidebar-brandbar { padding-block: .4rem 1.05rem; }
+.dashboard-shell .sidebar-brand { font-size: 1rem; font-weight: 720; letter-spacing: -.025em; }
+.dashboard-shell .workspace-sidebar-label {
+  margin-bottom: .4rem;
+  color: #b7cadd;
+  font-size: .65rem;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.dashboard-shell .dashboard-tabs .action-button {
+  --action-height: 44px;
+  --action-radius: 999px;
+  --action-size: .88rem;
+  --action-border: 1px solid transparent;
+  --action-surface: transparent;
+  --action-hover: #294d70;
+  --action-text-color: var(--palette-muted);
+}
+.dashboard-shell .dashboard-tabs .action-button[aria-current="page"] {
+  --action-border: 1px solid #6a8eb6;
+  --action-surface: #2c5681;
+  --action-hover: #35658f;
+  --action-text-color: var(--palette-text);
+}
+.dashboard-shell .dashboard-tabs .action-icon { font-size: 1rem; }
+.dashboard-shell .dashboard-tabs [aria-current="page"] .action-icon { color: #cee3ff; }
+.dashboard-shell .sidebar-toggle,
+.dashboard-shell .sidebar-mobile-toggle,
+.dashboard-shell .workspace-notifications {
+  --action-border: 1px solid #5c7e9e;
+  --action-surface: #203f5d;
+  --action-hover: #315777;
+  --action-text-color: #d1e2f5;
+}
+.dashboard-shell .workspace-notifications { --action-radius: 50%; }
+.dashboard-shell .dashboard-workspace-label { color: var(--palette-muted); font-weight: 500; }
+.dashboard-shell .workspace-sidebar-profile,
+.dashboard-shell .management-session { padding-top: .9rem; border-top: 1px solid var(--palette-line); }
+.dashboard-shell .dashboard-avatar { border-color: #6d92b7; background: #244d73; color: #c2deff; }
+.dashboard-shell .management-header h1 {
+  font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+  font-weight: 670;
+  letter-spacing: -.035em;
+  line-height: 1.18;
+}
+.dashboard-shell .management-header p { color: var(--palette-muted); }
+.dashboard-shell :is(.attendance-analytics, .dashboard-section) {
+  scroll-margin-top: 1rem;
+}
+
+/* The same card treatment surrounds real event, attendance, and account content. */
+.dashboard-shell .management-content .management-panel,
+.dashboard-shell .management-content .dashboard-event,
+.dashboard-shell .management-content :is(.card, .auth-card, .profile-settings-form, .profile-account-panel, .organizer-profile-card) {
+  border: 1px solid var(--palette-line);
+  border-radius: 21px;
+  background: var(--palette-panel);
+  box-shadow: var(--tech-panel-shadow);
+}
+.dashboard-shell .management-panel-header { padding: 1.2rem 1.3rem 1rem; }
+.dashboard-shell .management-content .management-panel h2,
+.dashboard-shell .management-content .analytics-panel h3 { font-size: 1.08rem; font-weight: 620; }
+.dashboard-shell .management-metrics { gap: 1rem; }
+.dashboard-shell .management-content .management-metric {
+  min-height: 154px;
+  padding: 1.1rem;
+  border: 1px solid var(--palette-line);
+  border-radius: 21px;
+  background: var(--palette-panel);
+  box-shadow: var(--tech-panel-shadow);
+}
+.dashboard-shell a.management-metric {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: .8rem .5rem;
+}
+.dashboard-shell a.management-metric:hover { border-color: #83a5c8; background: #2a4968; }
+.dashboard-shell a.management-metric > span:last-child {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+  margin: 0;
+  color: var(--palette-muted);
+  font-size: .85rem;
+  font-weight: 500;
+}
+.dashboard-shell a.management-metric .management-metric-top { grid-column: 2; grid-row: 1; }
+.dashboard-shell a.management-metric .management-metric-top > .icon { display: none; }
+.dashboard-shell .management-metric .management-tile-icon,
+.dashboard-shell .organizer-metric .organizer-metric-icon {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #52769b;
+  border-radius: 10px;
+  background: #244969;
+  color: var(--palette-cyan);
+}
+.dashboard-shell .management-content .management-metric strong {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin: 0;
+  padding: .75rem .85rem;
+  border: 1px solid #54779b;
+  border-radius: 14px;
+  background: radial-gradient(ellipse at 0 0, #477bb04d, transparent 72%), #1a354f;
+  color: var(--palette-text);
+  font-size: clamp(1.85rem, 2.7vw, 2.35rem);
+  font-weight: 560;
+  line-height: 1.15;
+  letter-spacing: -.025em;
+}
+.dashboard-shell .organizer-metric-label { align-self: center; color: var(--palette-muted); font-weight: 500; }
+.dashboard-shell .workspace-primary {
+  --action-surface: var(--palette-primary);
+  --action-hover: var(--palette-primary-hover);
+  --action-text-color: var(--palette-text);
+}
+.dashboard-shell .workspace-primary:hover { color: var(--palette-text); }
+.dashboard-shell .workspace-secondary { --action-hover: #315b80; --action-text-color: #c6dcff; }
+.dashboard-shell .workspace-secondary:hover { color: var(--palette-text); }
+
+/* Keep charts legible against the quieter panels without changing their data. */
+.dashboard-shell .attendance-analytics .analytics-charts {
+  --analytics-complete: #6aa8ff;
+  --analytics-pending: #ad97ff;
+  --analytics-track: #334f6d;
+  gap: 1rem;
+}
+.dashboard-shell .management-content .analytics-panel { padding: 1.25rem; }
+.dashboard-shell .analytics-track,
+.dashboard-shell .management-status-track { background: #334f6d; }
+.dashboard-shell .management-bars {
+  background: repeating-linear-gradient(to top, transparent 0 45px, #5e7e9b55 45px 46px) 0 0 / 100% 184px no-repeat;
+}
+.dashboard-shell .management-day-bars { height: 184px; }
+.dashboard-shell .management-day-bars i {
+  width: min(26%, 17px);
+  border-radius: 5px 5px 0 0;
+  background: linear-gradient(0deg, #2457ac, var(--palette-cyan));
+}
+.dashboard-shell .management-day-bars i:last-child { background: linear-gradient(0deg, #1b6959, var(--palette-mint)); }
+.dashboard-shell .management-content .management-table th {
+  border-color: var(--palette-line);
+  background: var(--palette-inset);
+  color: var(--palette-muted);
+}
+.dashboard-shell .management-content .management-table td { border-color: var(--palette-line); }
+.dashboard-shell .management-content .management-table tbody tr:hover { background: #2a4968; }
+.dashboard-shell .management-panel .management-scroll { border-radius: 0 0 20px 20px; }
+.dashboard-shell .student-portal .student-qr-panel,
+.dashboard-shell .student-portal .student-stamp-card { background-image: none; }
+.dashboard-shell .student-portal .student-event-cover:not(.has-image) {
+  background: linear-gradient(120deg, #244665, #294a75 65%, #3e3866);
+}
+.dashboard-shell .student-portal .student-cover-mark { background: #244b7b; color: #c6e2ff; }
+.dashboard-shell .student-portal .dashboard-stamp.is-earned { background: linear-gradient(145deg, #1c4d45, #1c3b4d); }
+
+@media (min-width: 1025px) {
+  .dashboard-shell .management-layout > .management-content { padding: 1.8rem clamp(1.25rem, 2.2vw, 2rem) 2.5rem; }
+  .dashboard-shell .management-layout > .management-sidebar {
+    position: relative;
+    top: auto;
+    height: 100%;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .dashboard-shell.sidebar-collapsed .dashboard-tabs .action-button { --action-radius: 14px; }
+}
+
+/* Phone and tablet tabs have their own row, outside the inert sidebar drawer. */
+@media (max-width: 1024px) {
+  .dashboard-shell > .management-layout.workspace-portal { background-image: none; }
+  .dashboard-shell { --dashboard-tab-height: 64px; }
+  .dashboard-shell > .management-layout {
+    grid-template-rows: var(--dashboard-header-height) minmax(0, 1fr) var(--dashboard-bar-bottom);
+  }
+  .dashboard-shell .dashboard-bottom-nav {
+    grid-area: bottom;
+    position: relative;
+    z-index: 40;
+    inset: auto;
+    display: flex;
+    width: 100%;
+    height: var(--dashboard-bar-bottom);
+    min-width: 0;
+    border-top: 1px solid var(--palette-line);
+    background: var(--palette-rail);
+  }
+  .dashboard-shell .dashboard-bottom-nav .action-button { --action-radius: 12px; }
+}
+
+@media (max-width: 570px) {
+  .dashboard-shell .management-content .management-metric { min-height: 130px; padding: .85rem; border-radius: 16px; }
+  .dashboard-shell .management-content .management-metric strong { padding: .6rem; font-size: 1.7rem; }
+  .dashboard-shell .management-content .management-panel { border-radius: 17px; }
+  .dashboard-shell .management-panel-header { padding-inline: 1.05rem; }
+  .dashboard-shell .management-day-bars { height: 150px; }
+  .dashboard-shell .management-bars { background-size: 100% 150px; }
+}

@@ -1,0 +1,3 @@
+# Keep the local .env file out of Git because it can contain deployment keys and mail
+# credentials.
+.env
