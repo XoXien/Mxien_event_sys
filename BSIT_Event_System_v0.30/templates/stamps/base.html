@@ -1,0 +1,13 @@
+{# Student pages supply their own navigation and dashboard components. #}
+{% extends 'portal/dashboard_base.html' %}
+{% load static static_assets %}
+
+{% block layout_class %}{{ block.super }} student-portal{% endblock %}
+{% block extra_head %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% asset 'css/student-desktop.css' %}">
+{% endblock %}
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% asset 'live-attendance.js' %}" defer></script>
+{% endblock %}

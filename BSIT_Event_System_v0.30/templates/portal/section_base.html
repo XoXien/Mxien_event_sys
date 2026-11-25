@@ -1,0 +1,9 @@
+{# Account settings, event details, and attendance screens retain the signed-in role's sidebar. #}
+{% extends section_base_template|default:'base.html' %}
+{% load static static_assets %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% asset 'css/style.css' %}">
+  <link rel="stylesheet" href="{% asset 'css/portal-theme.css' %}">
+  {{ block.super }}
+{% endblock %}

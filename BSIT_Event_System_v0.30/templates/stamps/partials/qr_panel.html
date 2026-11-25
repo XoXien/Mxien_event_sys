@@ -1,0 +1,28 @@
+{# Personalize the card around the rotating signed code so its scan area stays clear. #}
+<section class="management-panel dashboard-section student-qr-panel" id="my-qr" aria-labelledby="qr-heading">
+  <div class="management-panel-header"><h2 id="qr-heading">{% include 'partials/icon.html' with name='qr' only %} My attendance QR</h2></div>
+  <div class="student-qr-identity">
+    <span class="student-qr-avatar" aria-hidden="true">
+      {% if profile.profile_image %}<img src="{{ profile.profile_image.url }}" alt="">{% else %}{{ profile.display_name|slice:":1"|upper }}{% endif %}
+    </span>
+    <div>
+      <strong>{{ profile.display_name }}</strong>
+      <span>School ID · {{ profile.student_id|default:request.user.username }}</span>
+      {% if profile.program or profile.year_level %}<small>{{ profile.program }}{% if profile.program and profile.year_level %} · {% endif %}{{ profile.year_level }}</small>{% endif %}
+    </div>
+  </div>
+  <div class="dashboard-qr{% if student_section == 'qr' %} dashboard-qr--full{% endif %}">
+    <div class="dashboard-qr-preview" id="qr-preview">
+      <img id="student-qr" src="{% url 'stamps:student_qr' %}" alt="Attendance QR for {{ profile.display_name }}" width="352" height="352"{% if student_section == 'overview' %} loading="lazy"{% endif %}>
+      <span class="dashboard-qr-loading" id="qr-loading" hidden>Loading QR…</span>
+    </div>
+    <div class="dashboard-qr-copy">
+      <p>Your personal QR changes automatically. Show it to the organizer and wait for your identity to be confirmed.</p>
+      <p class="dashboard-qr-timer">Refreshes in <strong id="countdown">25s</strong></p>
+      <p id="qr-error" class="dashboard-qr-error" role="status" hidden>Unable to load the QR code. Retrying…</p>
+      {% if student_section == 'overview' %}
+        <a class="action-button workspace-secondary" href="{% url 'stamps:student_qr_page' %}">{% include 'partials/button_content.html' with icon='qr' label='Open full QR' only %}</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
