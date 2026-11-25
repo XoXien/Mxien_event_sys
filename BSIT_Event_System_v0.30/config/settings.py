@@ -27,6 +27,22 @@ ALLOWED_HOSTS = [
     if host.strip()
 ]
 
+# Accept HTTPS form submissions on the explicitly configured deployment hosts.
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get(
+        "DJANGO_CSRF_TRUSTED_ORIGINS",
+        ",".join(f"https://{host}" for host in ALLOWED_HOSTS
+                 if not host.startswith(".") and host not in {"*", "localhost", "127.0.0.1"}),
+    ).split(",")
+    if origin.strip()
+]
+
+# Enable secure cookies in production. Force HTTPS in the PythonAnywhere Web tab.
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
 # Load Django features first, followed by the BSIT project apps.
 INSTALLED_APPS = [
     "django.contrib.admin",
